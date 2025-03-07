@@ -31,7 +31,7 @@ func listFiles(dir string) []string {
 }
 
 // Read file and return byte array.
-func ReadSslmFile(path string) []byte {
+func readSslMateFiles(path string) []byte {
 	data, err := os.ReadFile(path)
 	if err != nil {
 		log.Fatal(err)

@@ -2,7 +2,8 @@ package gosslmate
 
 import "net/url"
 
-// Parameter for query string configuration.
+// Parameter for query string configuration. The struct properties are public to be able to change them.
+// Example: struct.ShowIssuer = false
 type sslMateParam struct {
 	Domain                   string `Domain:"example.com"`
 	SearchSubDomains         bool   `SearchSubDomains:"true"`
@@ -28,7 +29,7 @@ func NewSslMateQuery(Domain string, seachSubDomains bool, showDnsNames bool, sho
 	}
 }
 
-// Get the saved uri string.
+// This method is used to get the non public uristing. This contains the uri for the initial query.
 func (sslm *sslMateParam) getUriString() string {
 	return sslm.uriString
 }
@@ -61,6 +62,7 @@ func (sslm *sslMateParam) buildUri() *sslMateParam {
 		newQ.Add("expand", "cert_der")
 	}
 	result.RawQuery = newQ.Encode()
+	// Write urinstring to self.
 	sslm.uriString = result.String()
 	return sslm
 }

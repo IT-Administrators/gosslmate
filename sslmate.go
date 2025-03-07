@@ -15,7 +15,7 @@ func isValidJson(b []byte) bool {
 	return json.Valid(b)
 }
 
-// Function to issue new get request.
+// Function to issue new get request to apiUri.
 func invokeHttpGet(uri string) []byte {
 	req, err := http.NewRequest(http.MethodGet, uri, nil)
 	if err != nil {
@@ -39,6 +39,8 @@ func invokeHttpGet(uri string) []byte {
 	return responseBytes
 }
 
+// Convert the []byte response from the invokeHttpGet method to json object.
+// This way the result can be used with obj.parameter.
 func convertToJson(b []byte) []sslMate {
 	// Create sslMate object to save response as json.
 	sslm := []sslMate{}
@@ -61,9 +63,13 @@ func convertToJson(b []byte) []sslMate {
 	}
 }
 
-// Main function to query sslmate logs.
+// Query CT logs. The response is an array of []ssLMate even when the rest response is not a json array.
+// Use res[i].paramter to get the parameter value.
 func GetCtLogs(sslmq sslMateParam) []sslMate {
+	// Build uri from parameter.
 	sslmq.buildUri()
+	// Invoke request.
 	queryres := invokeHttpGet(sslmq.getUriString())
+	// Return json object.
 	return convertToJson(queryres)
 }
