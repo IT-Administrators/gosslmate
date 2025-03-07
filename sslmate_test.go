@@ -31,42 +31,39 @@ func listFiles(dir string) []string {
 }
 
 // Read file and return byte array.
-func ReadFile(path string) []byte {
+func ReadSslmFile(path string) []byte {
 	data, err := os.ReadFile(path)
 	if err != nil {
 		log.Fatal(err)
 	}
 	return data
 }
-
-func TestInvokeHttpGet(t *testing.T) {
-	// var files = listFiles(testfiles)
-	// sslm := []sslMate{}
-	cont := ReadFile("./examples/json01.json")
-	res := convertToJson(cont)
-	fmt.Println(res[0])
-
-	// for file := range files {
-	// 	// sslm := []sslMate{}
-	// 	cont := ReadFile(files[file])
-	// 	res := convertToJson(cont)
-	// 	// fmt.Println(sslm)
-	// 	fmt.Println(res.ID)
-	// }
-	// fmt.Println(sslm)
-	// sslm.buildUri()
-	// res := invokeHttpGet(sslm.uriString)
-	// // Unmarshal json result and safe to struct.
-	// if string(res) == "" {
-	// 	t.Error("No response.")
-	// }
-	// fmt.Println(string(res))
-	// fmt.Println(convertToJson(res))
-}
-
 func TestBuildUri(t *testing.T) {
 	_, err := url.Parse(sslmp.buildUri().getUriString())
 	if err != nil {
 		t.Error(err)
+	}
+	fmt.Println(sslmp.getUriString())
+}
+
+func TestInvokeHttpGet(t *testing.T) {
+	res := invokeHttpGet(sslmp.getUriString())
+	if len(res) == 0 {
+		t.Error(res)
+	}
+}
+
+func TestConvertToJson(t *testing.T) {
+	res := invokeHttpGet(sslmp.getUriString())
+	jsonres := convertToJson(res)
+	if len(jsonres) == 0 {
+		t.Error(jsonres)
+	}
+}
+
+func TestGetCtLogs(t *testing.T) {
+	jsonres := GetCtLogs(*sslmp)
+	if len(jsonres) == 0 {
+		t.Error(jsonres)
 	}
 }
