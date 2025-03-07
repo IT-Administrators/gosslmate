@@ -1,7 +1,6 @@
 package gosslmate
 
 import (
-	"fmt"
 	"io/fs"
 	"log"
 	"net/url"
@@ -43,7 +42,6 @@ func TestBuildUri(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	fmt.Println(sslmp.getUriString())
 }
 
 func TestInvokeHttpGet(t *testing.T) {
