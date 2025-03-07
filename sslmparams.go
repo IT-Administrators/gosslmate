@@ -16,16 +16,16 @@ type sslMateParam struct {
 }
 
 // Create new query parameter.
-func NewSslMateQuery(Domain string, seachSubDomains bool, showDnsNames bool, showIssuer bool, showRevocationInfo bool, showProblemReportingInfo bool, showCertData bool) *sslMateParam {
+func NewSslMateQuery(Domain string) *sslMateParam {
 
 	return &sslMateParam{
 		Domain:                   Domain,
-		SearchSubDomains:         seachSubDomains,
-		ShowDnsNames:             showDnsNames,
-		ShowIssuer:               showIssuer,
-		ShowRevocationInfo:       showRevocationInfo,
-		ShowProblemReportingInfo: showProblemReportingInfo,
-		ShowCertData:             showCertData,
+		SearchSubDomains:         true,
+		ShowDnsNames:             true,
+		ShowIssuer:               true,
+		ShowRevocationInfo:       true,
+		ShowProblemReportingInfo: true,
+		ShowCertData:             true,
 	}
 }
 

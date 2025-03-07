@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-var sslmp = NewSslMateQuery("Test.com", true, true, true, true, true, true)
+var sslmp = NewSslMateQuery("Test.com")
 var testfiles = "./examples"
 
 // Get all files in specified directory.
