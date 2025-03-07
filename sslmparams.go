@@ -1,6 +1,8 @@
 package gosslmate
 
-import "net/url"
+import (
+	"net/url"
+)
 
 // Parameter for query string configuration. The struct properties are public to be able to change them.
 // Example: struct.ShowIssuer = false
@@ -9,10 +11,19 @@ type sslMateParam struct {
 	SearchSubDomains         bool   `SearchSubDomains:"true"`
 	ShowDnsNames             bool   `ShowDnsNames:"true"`
 	ShowIssuer               bool   `ShowIssuer:"true"`
+	ShowIssuerWebsite        bool   `ShowIssuerWebsite:"false"`
+	ShowIssuerCaaDomains     bool   `ShowIssuerCaaDomains:"false"`
+	ShowIssuerOperator       bool   `ShowIssuerOperator:"false"`
+	ShowIssuerPubkeyDer      bool   `ShowIssuerPubkeyDer:"false"`
+	ShowIssuerNameDer        bool   `ShowIssuerNameDer:"false"`
 	ShowRevocationInfo       bool   `ShowRevocationInfo:"true"`
 	ShowProblemReportingInfo bool   `ShowProblemReportingInfo:"true"`
 	ShowCertData             bool   `ShowCertData:"true"`
-	uriString                string
+	MatchWildcards           bool   `MatchWildcards:"false"`
+	ShowPubKeyDer            bool   `PubKeyDer:"false"`
+	ShowPubKey               bool   `PubKey:"false"`
+
+	uriString string
 }
 
 // Create new query parameter.
@@ -43,6 +54,7 @@ func (sslm *sslMateParam) buildUri() *sslMateParam {
 	newQ := result.Query()
 	// Set query parameter. This parameter is mandatory.
 	newQ.Set("domain", sslm.Domain)
+
 	if sslm.SearchSubDomains {
 		newQ.Add("include_subdomains", "true")
 	}
@@ -52,6 +64,21 @@ func (sslm *sslMateParam) buildUri() *sslMateParam {
 	if sslm.ShowIssuer {
 		newQ.Add("expand", "issuer")
 	}
+	if sslm.ShowIssuerWebsite {
+		newQ.Add("expand", "issuer.website")
+	}
+	if sslm.ShowIssuerCaaDomains {
+		newQ.Add("expand", "issuer.caa_domains")
+	}
+	if sslm.ShowIssuerPubkeyDer {
+		newQ.Add("expand", "issuer.pubkey_der")
+	}
+	if sslm.ShowIssuerNameDer {
+		newQ.Add("expand", "issuer.name_der")
+	}
+	if sslm.ShowIssuerOperator {
+		newQ.Add("expand", "issuer.operator")
+	}
 	if sslm.ShowRevocationInfo {
 		newQ.Add("expand", "revocation")
 	}
@@ -60,6 +87,15 @@ func (sslm *sslMateParam) buildUri() *sslMateParam {
 	}
 	if sslm.ShowCertData {
 		newQ.Add("expand", "cert_der")
+	}
+	if sslm.MatchWildcards {
+		newQ.Add("match_wildcards", "true")
+	}
+	if sslm.ShowPubKeyDer {
+		newQ.Add("expand", "pubkey_der")
+	}
+	if sslm.ShowPubKey {
+		newQ.Add("expand", "pubkey")
 	}
 	result.RawQuery = newQ.Encode()
 	// Write urinstring to self.

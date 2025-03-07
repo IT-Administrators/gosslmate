@@ -2,6 +2,24 @@ package gosslmate
 
 type issuer struct {
 	Friendly_name string
+	Website       string
+	Caa_domains   []string
+	Operator      operator
+	Pubkey_sha256 string
+	Pubkey_der    string
+	Name          string
+	Name_der      string
+}
+
+type operator struct {
+	Name    string
+	Website string
+}
+
+type pubkey struct {
+	Type       string
+	Bit_length int
+	Curve      string
 }
 
 type revocation struct {
@@ -18,6 +36,8 @@ type sslMate struct {
 	// If jsonobject is array. "dns_names":["*.example.com","example.com"]
 	Dns_names     []string
 	Pubkey_sha256 string
+	Pubkey_der    string
+	Pubkey        pubkey
 	Issuer        issuer
 	Not_before    string
 	Not_after     string
