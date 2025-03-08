@@ -9,6 +9,7 @@ _The gosslmate module queries the certificate transparency logs from sslmate.com
     1. [Prerequisites](#prerequisites)
     1. [Installation](#installation)
 1. [How to use](#how-to-use)
+1. [Missing features](#missing-features)
 1. [Known bugs](#known-bugs)
 1. [License](/LICENSE)
 
@@ -81,6 +82,10 @@ qres[0].Issuer.Webiste
 ```
 
 For testing purposes and development you can find examples files in the examples folder.
+
+## Missing features
+
+There is one parameter missing from the offitial documentation, which is the ```after``` paramater. This parameter is used to: ``Return issuances that were discovered by SSLMate after the issuance with the specified ID.``.
 
 ## Known bugs
 
