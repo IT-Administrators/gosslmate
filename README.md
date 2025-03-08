@@ -38,19 +38,19 @@ After importing the module you can use it the following way.
 First you create a query object. This object is used to manage what you want to query. 
 
 ```Go
-    // Create a query object.
-    sslq = NewSslMateQuery("example.com")
+// Create a query object.
+sslq = NewSslMateQuery("example.com")
 ```
 
 The following parameters are true by default as show in the documentation on sslmate.com.
 
 ```Go
-    SearchSubDomains:         true,
-    ShowDnsNames:             true,
-    ShowIssuer:               true,
-    ShowRevocationInfo:       true,
-    ShowProblemReportingInfo: true,
-    ShowCertData:             true,
+SearchSubDomains:         true,
+ShowDnsNames:             true,
+ShowIssuer:               true,
+ShowRevocationInfo:       true,
+ShowProblemReportingInfo: true,
+ShowCertData:             true,
 ```
 
 Every other parameter is false by default and must be activated before running the query.
@@ -58,27 +58,26 @@ Every other parameter is false by default and must be activated before running t
 You can enable or disable a query parameter by running:
 
 ```Go
-    // Disable query parameter.
-    // Objname.Prorpertyname = false
-    sslq.ShowDnsNames = false
-
+// Disable query parameter.
+// Objname.Prorpertyname = false
+sslq.ShowDnsNames = false
 ```
 
 To run the configured query you have to call the ```GetCtLogs```function, with the ```sslq``` parameter. Save the result to a variable to use it later on. 
 
 ```Go
-    // Run query and save response to json object.
-    qres = GetCtLogs(sslq)
+// Run query and save response to json object.
+qres = GetCtLogs(sslq)
 ```
 
 The response of this api is always an array of the ```sslMate```struct, even if the initial response is a single json object. To access the different properties you have to use the reference of the object just like accessing any other value in an array.
 
 ```Go
-    // Access properties.
-    qres[0].Issuer.Webiste
+// Access properties.
+qres[0].Issuer.Webiste
 
-    // Result:
-    // https://sectigo.com/
+// Result:
+// https://sectigo.com/
 ```
 
 For testing purposes and development you can find examples files in the examples folder.
