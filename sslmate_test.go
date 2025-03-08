@@ -53,20 +53,20 @@ func TestBuildUri(t *testing.T) {
 	}
 }
 
-// func TestInvokeHttpGet(t *testing.T) {
-// 	res := invokeHttpGet(sslmp.getUriString())
-// 	if len(res) == 0 {
-// 		t.Error(res)
-// 	}
-// }
+func TestInvokeHttpGet(t *testing.T) {
+	res := invokeHttpGet(sslmp.getUriString())
+	if len(res) == 0 {
+		t.Error(res)
+	}
+}
 
-// func TestConvertToJson(t *testing.T) {
-// 	res := invokeHttpGet(sslmp.getUriString())
-// 	jsonres := convertToJson(res)
-// 	if len(jsonres) == 0 {
-// 		t.Error(jsonres)
-// 	}
-// }
+func TestConvertToJson(t *testing.T) {
+	res := invokeHttpGet(sslmp.getUriString())
+	jsonres := convertToJson(res)
+	if len(jsonres) == 0 {
+		t.Error(jsonres)
+	}
+}
 
 func TestGetCtLogs(t *testing.T) {
 	// Enable all parameters
